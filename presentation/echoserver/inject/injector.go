@@ -14,6 +14,6 @@ func NewInjector(db *gorm.DB) Injector {
 	return Injector{db}
 }
 
-func (i *Injector) DB() *gorm.DB {
+func (injector *Injector) DB() *gorm.DB {
 	return db.NewDB()
 }

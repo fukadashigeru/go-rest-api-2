@@ -2,7 +2,7 @@ package main
 
 import (
 	"go-rest-api/db"
-	"go-rest-api/router"
+	"go-rest-api/presentation/echoserver/router"
 )
 
 func main() {
