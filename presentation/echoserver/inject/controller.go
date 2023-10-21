@@ -1,7 +1,7 @@
 package inject
 
 import (
-	"go-rest-api/controller"
+	"go-rest-api/presentation/echoserver/controller"
 
 	"github.com/labstack/echo/v4"
 )
