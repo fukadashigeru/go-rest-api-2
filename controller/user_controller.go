@@ -1,9 +1,9 @@
 package controller
 
 import (
-	icontoller "go-rest-api/interface/controller"
-	iusecase "go-rest-api/interface/usecase"
-	"go-rest-api/model"
+	icontoller "go-rest-api/domain/controller"
+	"go-rest-api/domain/model"
+	iusecase "go-rest-api/domain/usecase"
 	"net/http"
 	"os"
 	"time"

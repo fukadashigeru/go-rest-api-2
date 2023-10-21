@@ -1,7 +1,7 @@
 package inject
 
 import (
-	iusecase "go-rest-api/interface/usecase"
+	iusecase "go-rest-api/domain/usecase"
 	"go-rest-api/usecase"
 )
 

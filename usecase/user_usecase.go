@@ -1,9 +1,9 @@
 package usecase
 
 import (
-	irepository "go-rest-api/interface/repository"
-	iusecase "go-rest-api/interface/usecase"
-	"go-rest-api/model"
+	"go-rest-api/domain/model"
+	irepository "go-rest-api/domain/repository"
+	iusecase "go-rest-api/domain/usecase"
 	"os"
 	"time"
 

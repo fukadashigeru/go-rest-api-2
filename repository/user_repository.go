@@ -1,8 +1,8 @@
 package repository
 
 import (
-	irepository "go-rest-api/interface/repository"
-	"go-rest-api/model"
+	"go-rest-api/domain/model"
+	irepository "go-rest-api/domain/repository"
 
 	"gorm.io/gorm"
 )

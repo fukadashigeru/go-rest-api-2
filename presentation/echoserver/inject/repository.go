@@ -1,7 +1,7 @@
 package inject
 
 import (
-	irepository "go-rest-api/interface/repository"
+	irepository "go-rest-api/domain/repository"
 	"go-rest-api/repository"
 )
 
