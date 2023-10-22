@@ -3,7 +3,7 @@ package icontoller
 import "github.com/labstack/echo/v4"
 
 type IUserController interface {
-	SignUp(c echo.Context) error
-	Login(c echo.Context) error
-	Logout(c echo.Context) error
+	SignUp(ctx echo.Context) error
+	Login(ctx echo.Context) error
+	Logout(ctx echo.Context) error
 }

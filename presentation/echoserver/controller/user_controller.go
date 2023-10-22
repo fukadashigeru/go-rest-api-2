@@ -19,26 +19,26 @@ func NewUserController(uu iusecase.IUserUsecase) icontoller.IUserController {
 	return &userController{uu}
 }
 
-func (uc *userController) SignUp(c echo.Context) error {
+func (uc *userController) SignUp(ctx echo.Context) error {
 	user := model.User{}
-	if err := c.Bind(&user); err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
+	if err := ctx.Bind(&user); err != nil {
+		return ctx.JSON(http.StatusBadRequest, err.Error())
 	}
 	userRes, err := uc.uu.SignUp(user)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
+		return ctx.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusCreated, userRes)
+	return ctx.JSON(http.StatusCreated, userRes)
 }
 
-func (uc *userController) Login(c echo.Context) error {
+func (uc *userController) Login(ctx echo.Context) error {
 	user := model.User{}
-	if err := c.Bind(&user); err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
+	if err := ctx.Bind(&user); err != nil {
+		return ctx.JSON(http.StatusBadRequest, err.Error())
 	}
 	tokenString, err := uc.uu.Login(user)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
+		return ctx.JSON(http.StatusInternalServerError, err.Error())
 	}
 	cookie := new(http.Cookie)
 	cookie.Name = "token"
@@ -49,11 +49,11 @@ func (uc *userController) Login(c echo.Context) error {
 	// cookie.Secure = true
 	cookie.HttpOnly = true
 	cookie.SameSite = http.SameSiteNoneMode
-	c.SetCookie(cookie)
-	return c.NoContent(http.StatusOK)
+	ctx.SetCookie(cookie)
+	return ctx.NoContent(http.StatusOK)
 }
 
-func (uc *userController) Logout(c echo.Context) error {
+func (uc *userController) Logout(ctx echo.Context) error {
 	cookie := new(http.Cookie)
 	cookie.Name = "token"
 	cookie.Value = ""
@@ -63,6 +63,6 @@ func (uc *userController) Logout(c echo.Context) error {
 	// cookie.Secure = true
 	cookie.HttpOnly = true
 	cookie.SameSite = http.SameSiteNoneMode
-	c.SetCookie(cookie)
-	return c.NoContent(http.StatusOK)
+	ctx.SetCookie(cookie)
+	return ctx.NoContent(http.StatusOK)
 }
