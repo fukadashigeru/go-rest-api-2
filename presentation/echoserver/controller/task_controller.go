@@ -67,7 +67,7 @@ func (tc *taskController) UpdateTask(ctx echo.Context) error {
 	user := ctx.Get("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
 	userId := claims["user_id"]
-	id := ctx.Param("user_id")
+	id := ctx.Param("taskId")
 	taskId, _ := strconv.Atoi(id)
 
 	task := model.Task{}
@@ -85,7 +85,7 @@ func (tc *taskController) DeleteTask(ctx echo.Context) error {
 	user := ctx.Get("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
 	userId := claims["user_id"]
-	id := ctx.Param("user_id")
+	id := ctx.Param("taskId")
 	taskId, _ := strconv.Atoi(id)
 
 	err := tc.tu.DeleteTask(uint(userId.(float64)), uint(taskId))

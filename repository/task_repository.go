@@ -50,7 +50,7 @@ func (tr *taskRepository) UpdateTask(task *model.Task, userId uint, taskId uint)
 }
 
 func (tr *taskRepository) DeleteTask(userId uint, taskId uint) error {
-	result := tr.db.Where("id=? AND user_id?", taskId, userId).Delete(&model.Task{})
+	result := tr.db.Where("id=? AND user_id=?", taskId, userId).Delete(&model.Task{})
 	if result.Error != nil {
 		return result.Error
 	}
