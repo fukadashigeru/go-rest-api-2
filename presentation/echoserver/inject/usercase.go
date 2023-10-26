@@ -6,9 +6,9 @@ import (
 )
 
 func (injector *Injector) UserUsecase() iusecase.IUserUsecase {
-	return usecase.NewUserUsecase(injector.UserRepository())
+	return usecase.NewUserUsecase(injector.UserRepository(), injector.UserValidator())
 }
 
 func (injector *Injector) TaskUsecase() iusecase.ITaskUsecase {
-	return usecase.NewTaskUsecase(injector.TaskRepository())
+	return usecase.NewTaskUsecase(injector.TaskRepository(), injector.TaskValidator())
 }

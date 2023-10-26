@@ -4,6 +4,7 @@ import (
 	"go-rest-api/domain/model"
 	irepository "go-rest-api/domain/repository"
 	iusecase "go-rest-api/domain/usecase"
+	"go-rest-api/validator"
 	"os"
 	"time"
 
@@ -13,13 +14,17 @@ import (
 
 type userUsercase struct {
 	ur irepository.IUserRepository
+	uv validator.IUserValidator
 }
 
-func NewUserUsecase(ur irepository.IUserRepository) iusecase.IUserUsecase {
-	return &userUsercase{ur}
+func NewUserUsecase(ur irepository.IUserRepository, uv validator.IUserValidator) iusecase.IUserUsecase {
+	return &userUsercase{ur, uv}
 }
 
 func (uu *userUsercase) SignUp(user model.User) (model.UserResponse, error) {
+	if err := uu.uv.UserValidate(user); err != nil {
+		return model.UserResponse{}, err
+	}
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
 		return model.UserResponse{}, err
@@ -36,6 +41,9 @@ func (uu *userUsercase) SignUp(user model.User) (model.UserResponse, error) {
 }
 
 func (uu *userUsercase) Login(user model.User) (string, error) {
+	if err := uu.uv.UserValidate(user); err != nil {
+		return "", err
+	}
 	storedUser := model.User{}
 	if err := uu.ur.GetUserByEmail(&storedUser, user.Email); err != nil {
 		return "", err
